@@ -3,7 +3,7 @@ package URI::Escape::JavaScript;
 use strict;
 use 5.8.1;
 use warnings;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 use Encode qw(encode FB_PERLQQ);
 use base qw(Exporter);
 our @EXPORT    = qw(js_escape js_unescape);
@@ -19,7 +19,7 @@ sub escape {
 
 sub unescape {
     my $escaped = shift;
-    $escaped =~ s/%u((?:[0-9a-f]{2})+)/chr(hex($1))/eig;
+    $escaped =~ s/%u([0-9a-f]{4})/chr(hex($1))/eig;
     $escaped =~ s/%([0-9a-f]{2})/chr(hex($1))/eig;
     return $escaped;
 }
